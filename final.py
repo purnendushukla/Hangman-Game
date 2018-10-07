@@ -1,5 +1,7 @@
 from random import choice
 from nltk.corpus import brown
+from nltk.corpus import stopwords
+
 difficulty = raw_input("Set the difficulty to either easy, medium, or hard:")
 
 difficulty = difficulty.lower()
@@ -19,11 +21,14 @@ else:
 	max_length = 5
 
 word_list = brown.words()
+stopwords = stopwords.words('english')
+word_list1 = [w for w in word_list if w.lower() not in stopwords]
 
-answer = choice(word_list)
+
+answer = choice(word_list1)
 answer_length = len(answer)
 while answer_length < min_length or answer_length > max_length or (not answer.isalpha()):
-    answer = choice(word_list)
+    answer = choice(word_list1)
     answer_length = len(answer)
 	
 
@@ -88,7 +93,7 @@ def take_input():
                     
             guess += 1
 
-            
+
 
 def word_match():
     return not ("__ " in attempt)
